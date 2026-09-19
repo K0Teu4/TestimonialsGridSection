@@ -19,6 +19,9 @@
   --dark-blue: hsl(219, 29%, 14%);
   --black: hsl(0, 0%, 7%);
 
+  /* Effects */
+  --shadow: 0 0.9375rem 1.875rem rgba(0, 0, 0, 0.08);
+
   /* Typography */
   --font: 'Barlow Semi Condensed', sans-serif;
   --fs-body: 0.8125rem;
@@ -36,7 +39,7 @@ body {
   font-weight: 500;
   line-height: 1.5;
   color: var(--grey-500);
-  padding: 3rem 1.5rem;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 1.5rem);
 }
 
 .page {
@@ -46,9 +49,9 @@ body {
 
 .visually-hidden {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: -0.0625rem;
   padding: 0;
   overflow: hidden;
   clip: rect(0 0 0 0);
@@ -56,7 +59,7 @@ body {
   border: 0;
 }
 
-/* ===== Grid: mobile-first single column ===== */
+/* ===== Grid: mobile-first ===== */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -72,17 +75,42 @@ body {
 /* ===== Card base ===== */
 .card {
   border-radius: var(--radius);
-  padding: 1.5rem 1.75rem 1.75rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  padding: clamp(1.25rem, 3vw, 1.5rem) clamp(1.25rem, 3vw, 1.75rem);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
 }
 
-.card--daniel   { grid-area: daniel; }
-.card--jonathan { grid-area: jonathan; }
-.card--kira     { grid-area: kira; }
-.card--jeanette { grid-area: jeanette; }
-.card--patrick  { grid-area: patrick; }
+/* ===== Modifiers: placement + background (one rule each) ===== */
+.card--daniel {
+  grid-area: daniel;
+  background-color: var(--purple-500);
+  background-image: url("./images/bg-pattern-quotation.svg"),
+    linear-gradient(120deg, var(--purple-500) 55%, var(--purple-300) 140%);
+  background-repeat: no-repeat, no-repeat;
+  background-position: right 2rem top 0, center;
+  background-size: 6.5rem auto, cover;
+}
+
+.card--jonathan {
+  grid-area: jonathan;
+  background-color: var(--grey-500);
+}
+
+.card--kira {
+  grid-area: kira;
+  background-color: var(--white);
+}
+
+.card--jeanette {
+  grid-area: jeanette;
+  background-color: var(--white);
+}
+
+.card--patrick {
+  grid-area: patrick;
+  background-color: var(--dark-blue);
+}
 
 /* ===== Card header ===== */
 .card__header {
@@ -112,7 +140,6 @@ body {
   margin-block-start: 0.125rem;
 }
 
-/* ===== Quote parts ===== */
 .card__headline {
   font-size: 1.1875rem;
   font-weight: 600;
@@ -128,39 +155,43 @@ body {
   line-height: 1.55;
 }
 
-/* ===== Light cards ===== */
-.card--jonathan,
-.card--jeanette {
-  background-color: var(--white);
-}
-
-.card--jonathan .card__name,
+/* ===== Light scheme: Kira + Jeanette ===== */
+.card--kira .card__name,
+.card--kira .card__headline,
 .card--jeanette .card__name,
-.card--jonathan .card__headline,
 .card--jeanette .card__headline {
   color: var(--dark-blue);
 }
 
-.card--jonathan .card__status,
+.card--kira .card__status,
 .card--jeanette .card__status {
   color: var(--grey-400);
 }
 
-.card--jonathan .card__review,
+.card--kira .card__review,
 .card--jeanette .card__review {
   color: var(--grey-500);
 }
 
-/* ===== Daniel: purple with gradient and quotation pattern ===== */
-.card--daniel {
-  background-color: var(--purple-500);
-  background-image: url("./images/bg-pattern-quotation.svg"),
-    linear-gradient(120deg, var(--purple-500) 55%, var(--purple-300) 140%);
-  background-repeat: no-repeat, no-repeat;
-  background-position: right 2rem top 0, center;
-  background-size: 6.5rem auto, cover;
+/* ===== Dark scheme: Jonathan + Patrick ===== */
+.card--jonathan .card__name,
+.card--jonathan .card__headline,
+.card--patrick .card__name,
+.card--patrick .card__headline {
+  color: var(--white);
 }
 
+.card--jonathan .card__status,
+.card--patrick .card__status {
+  color: var(--grey-200);
+}
+
+.card--jonathan .card__review,
+.card--patrick .card__review {
+  color: var(--grey-100);
+}
+
+/* ===== Purple scheme: Daniel ===== */
 .card--daniel .card__name,
 .card--daniel .card__headline {
   color: var(--white);
@@ -175,32 +206,6 @@ body {
   border-color: var(--purple-300);
 }
 
-/* ===== Dark cards ===== */
-.card--kira {
-  background-color: var(--dark-blue);
-}
-
-.card--patrick {
-  background-color: var(--grey-500);
-}
-
-.card--kira .card__name,
-.card--patrick .card__name,
-.card--kira .card__headline,
-.card--patrick .card__headline {
-  color: var(--white);
-}
-
-.card--kira .card__status,
-.card--patrick .card__status {
-  color: var(--grey-200);
-}
-
-.card--kira .card__review,
-.card--patrick .card__review {
-  color: var(--grey-100);
-}
-
 /* ===== Tablet: 2 columns ===== */
 @media (min-width: 48em) {
   .grid {
@@ -213,7 +218,7 @@ body {
   }
 }
 
-/* ===== Desktop: 4 columns staggered ===== */
+/* ===== Desktop: 4 columns ===== */
 @media (min-width: 64em) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
