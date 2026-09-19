@@ -17,7 +17,7 @@ This is a solution to the [Testimonials grid section challenge on Frontend Mento
 
 ### Screenshot
 
-![Testimonials Grid Section](./preview.png)
+![Desktop view](./k0teu4.github.io-TestimonialsGridSection.png)
 
 ### Links
 
@@ -60,3 +60,4 @@ The quotation mark SVG is a background-image on Daniel's card, layered with a su
 
 - GitHub — [@K0Teu4](https://github.com/K0Teu4)
 - Frontend Mentor — [@K0Teu4](https://www.frontendmentor.io/profile/K0Teu4)
+
